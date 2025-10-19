@@ -1,0 +1,11 @@
+# Ignore MLflow, models, and data folders
+mlruns/
+data/
+models/
+outputs/
+__pycache__/
+.env
+*.pkl
+*.csv
+*.parquet
+*.db
