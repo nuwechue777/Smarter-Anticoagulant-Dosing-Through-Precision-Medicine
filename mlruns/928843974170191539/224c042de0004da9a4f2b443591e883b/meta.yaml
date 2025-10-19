@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/928843974170191539/224c042de0004da9a4f2b443591e883b/artifacts
+deleted_time: 1760200215657
+end_time: 1760031499542
+entry_point_name: ''
+experiment_id: '928843974170191539'
+lifecycle_stage: deleted
+run_id: 224c042de0004da9a4f2b443591e883b
+run_name: ExtraTree_Baseline
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1760031456394
+status: 4
+tags: []
+user_id: bando

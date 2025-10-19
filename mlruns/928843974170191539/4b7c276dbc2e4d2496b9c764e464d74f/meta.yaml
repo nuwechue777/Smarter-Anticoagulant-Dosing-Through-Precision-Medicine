@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/928843974170191539/4b7c276dbc2e4d2496b9c764e464d74f/artifacts
+deleted_time: 1760200246286
+end_time: 1759944552025
+entry_point_name: ''
+experiment_id: '928843974170191539'
+lifecycle_stage: deleted
+run_id: 4b7c276dbc2e4d2496b9c764e464d74f
+run_name: DecisionTree_Baseline
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1759944547489
+status: 3
+tags: []
+user_id: bando
