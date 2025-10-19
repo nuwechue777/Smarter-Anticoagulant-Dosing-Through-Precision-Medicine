@@ -73,7 +73,6 @@ from mlflow.protos.service_pb2 import (
     GetExperimentByName,
     GetLoggedModel,
     GetMetricHistory,
-    GetOnlineTraceDetails,
     GetRun,
     GetScorer,
     GetTraceInfo,
@@ -99,7 +98,6 @@ from mlflow.protos.service_pb2 import (
     SearchRuns,
     SearchTraces,
     SearchTracesV3,
-    SearchUnifiedTraces,
     SetDatasetTags,
     SetExperimentTag,
     SetLoggedModelTags,
@@ -134,8 +132,8 @@ from mlflow.utils.rest_utils import (
     http_request,
     verify_rest_response,
 )
+from mlflow.utils.validation import _resolve_experiment_ids_and_locations
 
-_METHOD_TO_INFO = extract_api_info_for_service(MlflowService, _REST_API_PATH_PREFIX)
 _logger = logging.getLogger(__name__)
 
 
@@ -148,6 +146,8 @@ class RestStore(AbstractStore):
             :py:class:`mlflow.rest_utils.MlflowHostCreds` for the request. Note that this
             is a function so that we can obtain fresh credentials in the case of expiry.
     """
+
+    _METHOD_TO_INFO = extract_api_info_for_service(MlflowService, _REST_API_PATH_PREFIX)
 
     def __init__(self, get_host_creds):
         super().__init__()
@@ -189,14 +189,15 @@ class RestStore(AbstractStore):
         json_body=None,
         endpoint=None,
         retry_timeout_seconds=None,
+        response_proto=None,
     ):
         if endpoint:
             # Allow customizing the endpoint for compatibility with dynamic endpoints, such as
             # /mlflow/traces/{trace_id}/info.
-            _, method = _METHOD_TO_INFO[api]
+            _, method = self._METHOD_TO_INFO[api]
         else:
-            endpoint, method = _METHOD_TO_INFO[api]
-        response_proto = api.Response()
+            endpoint, method = self._METHOD_TO_INFO[api]
+        response_proto = response_proto or api.Response()
         return call_endpoint(
             self.get_host_creds(),
             endpoint,
@@ -440,105 +441,76 @@ class RestStore(AbstractStore):
         response_proto = self._call_endpoint(GetTraceInfo, req_body, endpoint=endpoint)
         return TraceInfoV2.from_proto(response_proto.trace_info).to_v3()
 
-    def get_online_trace_details(
-        self,
-        trace_id: str,
-        sql_warehouse_id: str,
-        source_inference_table: str,
-        source_databricks_request_id: str,
-    ):
-        req = GetOnlineTraceDetails(
-            trace_id=trace_id,
-            sql_warehouse_id=sql_warehouse_id,
-            source_inference_table=source_inference_table,
-            source_databricks_request_id=source_databricks_request_id,
-        )
-        req_body = message_to_json(req)
-        response_proto = self._call_endpoint(GetOnlineTraceDetails, req_body)
-        return response_proto.trace_data
-
     def search_traces(
         self,
-        experiment_ids: list[str],
+        experiment_ids: list[str] | None = None,
         filter_string: str | None = None,
         max_results: int = SEARCH_TRACES_DEFAULT_MAX_RESULTS,
         order_by: list[str] | None = None,
         page_token: str | None = None,
         model_id: str | None = None,
-        sql_warehouse_id: str | None = None,
+        locations: list[str] | None = None,
     ):
-        if sql_warehouse_id is None:
-            # Create trace_locations from experiment_ids for the V3 API
-            trace_locations = []
-            for exp_id in experiment_ids:
-                try:
-                    location = TraceLocation.from_experiment_id(exp_id)
-                    proto_location = location.to_proto()
-                    trace_locations.append(proto_location)
-                except Exception as e:
-                    raise MlflowException(
-                        f"Invalid experiment ID format: {exp_id}. Error: {e!s}"
-                    ) from e
+        locations = _resolve_experiment_ids_and_locations(experiment_ids, locations)
 
-            # Create V3 request message using protobuf
-            request = SearchTracesV3(
-                locations=trace_locations,
-                filter=filter_string,
-                max_results=max_results,
-                order_by=order_by,
-                page_token=page_token,
+        if model_id is not None:
+            raise MlflowException.invalid_parameter_value(
+                "Searching traces by model_id is not supported on the current tracking server.",
             )
 
-            req_body = message_to_json(request)
-            v3_endpoint = f"{_V3_TRACE_REST_API_PATH_PREFIX}/search"
+        return self._search_traces(
+            locations=locations,
+            filter_string=filter_string,
+            max_results=max_results,
+            order_by=order_by,
+            page_token=page_token,
+        )
 
-            try:
-                response_proto = self._call_endpoint(SearchTracesV3, req_body, v3_endpoint)
-            except MlflowException as e:
-                if e.error_code == databricks_pb2.ErrorCode.Name(databricks_pb2.ENDPOINT_NOT_FOUND):
-                    _logger.debug(
-                        "Server does not support SearchTracesV3 API yet. Falling back to V2 API."
-                    )
-                    response_proto = self._call_endpoint(SearchTraces, req_body)
-                else:
-                    raise
-
-            trace_infos = [TraceInfo.from_proto(t) for t in response_proto.traces]
-        else:
-            response_proto = self._search_unified_traces(
-                model_id=model_id,
-                sql_warehouse_id=sql_warehouse_id,
-                experiment_ids=experiment_ids,
-                filter_string=filter_string,
-                max_results=max_results,
-                order_by=order_by,
-                page_token=page_token,
-            )
-            # Convert TraceInfo (v2) objects to TraceInfoV3 objects for consistency
-            trace_infos = [TraceInfo.from_proto(t) for t in response_proto.traces]
-        return trace_infos, response_proto.next_page_token or None
-
-    def _search_unified_traces(
+    def _search_traces(
         self,
-        model_id: str,
-        sql_warehouse_id: str,
-        experiment_ids: list[str],
+        locations: list[str],
         filter_string: str | None = None,
         max_results: int = SEARCH_TRACES_DEFAULT_MAX_RESULTS,
         order_by: list[str] | None = None,
         page_token: str | None = None,
-    ):
-        request = SearchUnifiedTraces(
-            model_id=model_id,
-            sql_warehouse_id=sql_warehouse_id,
-            experiment_ids=experiment_ids,
+    ) -> tuple[list[TraceInfo], str | None]:
+        # Create trace_locations from experiment_ids for the V3 API
+        trace_locations = []
+        for exp_id in locations:
+            try:
+                location = TraceLocation.from_experiment_id(exp_id)
+                proto_location = location.to_proto()
+                trace_locations.append(proto_location)
+            except Exception as e:
+                raise MlflowException(
+                    f"Invalid experiment ID format: {exp_id}. Error: {e!s}"
+                ) from e
+
+        # Create V3 request message using protobuf
+        request = SearchTracesV3(
+            locations=trace_locations,
             filter=filter_string,
             max_results=max_results,
             order_by=order_by,
             page_token=page_token,
         )
+
         req_body = message_to_json(request)
-        return self._call_endpoint(SearchUnifiedTraces, req_body)
+        v3_endpoint = f"{_V3_TRACE_REST_API_PATH_PREFIX}/search"
+
+        try:
+            response_proto = self._call_endpoint(SearchTracesV3, req_body, v3_endpoint)
+        except MlflowException as e:
+            if e.error_code == databricks_pb2.ErrorCode.Name(databricks_pb2.ENDPOINT_NOT_FOUND):
+                _logger.debug(
+                    "Server does not support SearchTracesV3 API yet. Falling back to V2 API."
+                )
+                response_proto = self._call_endpoint(SearchTraces, req_body)
+            else:
+                raise
+
+        trace_infos = [TraceInfo.from_proto(t) for t in response_proto.traces]
+        return trace_infos, response_proto.next_page_token or None
 
     def calculate_trace_filter_correlation(
         self,
@@ -1667,13 +1639,15 @@ class RestStore(AbstractStore):
         response = self._call_endpoint(RemoveDatasetFromExperiments, req_body)
         return EvaluationDataset.from_proto(response.dataset)
 
-    def log_spans(self, experiment_id: str, spans: list[Span]) -> list[Span]:
+    def log_spans(self, location: str, spans: list[Span], tracking_uri=None) -> list[Span]:
         """
         Log multiple span entities to the tracking store via the OTel API.
 
         Args:
-            experiment_id: The experiment ID to log spans to.
+            location: The location to log spans to. It should be experiment ID of an MLflow
+                experiment.
             spans: List of Span entities to log. All spans must belong to the same trace.
+            tracking_uri: The tracking URI to use. Default to None.
 
         Returns:
             List of logged Span entities.
@@ -1705,7 +1679,7 @@ class RestStore(AbstractStore):
         request = ExportTraceServiceRequest()
         resource_spans = request.resource_spans.add()
         scope_spans = resource_spans.scope_spans.add()
-        scope_spans.spans.extend(span._to_otel_proto() for span in spans)
+        scope_spans.spans.extend(span.to_otel_proto() for span in spans)
 
         response = http_request(
             host_creds=self.get_host_creds(),
@@ -1714,19 +1688,20 @@ class RestStore(AbstractStore):
             data=request.SerializeToString(),
             extra_headers={
                 "Content-Type": "application/x-protobuf",
-                MLFLOW_EXPERIMENT_ID_HEADER: experiment_id,
+                MLFLOW_EXPERIMENT_ID_HEADER: location,
             },
         )
 
         verify_rest_response(response, OTLP_TRACES_PATH)
         return spans
 
-    async def log_spans_async(self, experiment_id: str, spans: list[Span]) -> list[Span]:
+    async def log_spans_async(self, location: str, spans: list[Span]) -> list[Span]:
         """
         Async wrapper for log_spans method.
 
         Args:
-            experiment_id: The experiment ID to log spans to.
+            location: The location to log spans to. It should be experiment ID of an MLflow
+                experiment.
             spans: List of Span entities to log. All spans must belong to the same trace.
 
         Returns:
@@ -1735,4 +1710,4 @@ class RestStore(AbstractStore):
         Raises:
             MlflowException: If spans belong to different traces or the OTel API call fails.
         """
-        return self.log_spans(experiment_id, spans)
+        return self.log_spans(location, spans)

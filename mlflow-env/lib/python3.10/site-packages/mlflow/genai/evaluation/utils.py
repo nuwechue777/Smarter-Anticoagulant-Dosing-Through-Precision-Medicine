@@ -4,7 +4,7 @@ import math
 from concurrent.futures import Future, as_completed
 from typing import TYPE_CHECKING, Any, Collection
 
-from mlflow.entities import Assessment, Trace
+from mlflow.entities import Assessment, Trace, TraceData
 from mlflow.entities.assessment import DEFAULT_FEEDBACK_NAME, Feedback
 from mlflow.entities.assessment_source import AssessmentSource, AssessmentSourceType
 from mlflow.exceptions import MlflowException
@@ -54,6 +54,9 @@ def _convert_eval_set_to_df(data: "EvaluationDatasetTypes") -> "pd.DataFrame":
     Takes in a dataset in the format that `mlflow.genai.evaluate()` expects and
     converts it into a pandas DataFrame.
     """
+    from mlflow.entities.evaluation_dataset import EvaluationDataset as EntityEvaluationDataset
+    from mlflow.genai.datasets import EvaluationDataset as ManagedEvaluationDataset
+
     if isinstance(data, list):
         # validate that every item in the list is a dict and has inputs as key
         for item in data:
@@ -65,6 +68,8 @@ def _convert_eval_set_to_df(data: "EvaluationDatasetTypes") -> "pd.DataFrame":
     elif isinstance(data, pd.DataFrame):
         # Data is already a pd DataFrame, just copy it
         df = data.copy()
+    elif isinstance(data, (EntityEvaluationDataset, ManagedEvaluationDataset)):
+        df = data.to_df()
     else:
         try:
             from mlflow.utils.spark_utils import get_spark_dataframe_type
@@ -175,10 +180,15 @@ def _extract_request_response_from_trace(df: "pd.DataFrame") -> "pd.DataFrame":
     if "trace" not in df.columns:
         return df
 
+    def _extract_attribute(trace_data: TraceData, attribute_name: str) -> Any:
+        if att := getattr(trace_data, attribute_name, None):
+            return json.loads(att)
+        return None
+
     if "request" not in df.columns:
-        df["request"] = df["trace"].apply(lambda trace: json.loads(trace.data.request))
+        df["request"] = df["trace"].apply(lambda trace: _extract_attribute(trace.data, "request"))
     if "response" not in df.columns:
-        df["response"] = df["trace"].apply(lambda trace: json.loads(trace.data.response))
+        df["response"] = df["trace"].apply(lambda trace: _extract_attribute(trace.data, "response"))
     return df
 
 

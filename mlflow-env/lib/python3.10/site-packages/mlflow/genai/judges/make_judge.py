@@ -1,15 +1,23 @@
 from mlflow.genai.judges.base import Judge
 from mlflow.genai.judges.instructions_judge import InstructionsJudge
+from mlflow.telemetry.events import MakeJudgeEvent
+from mlflow.telemetry.track import record_usage_event
 from mlflow.utils.annotations import experimental
 
 
 @experimental(version="3.4.0")
+@record_usage_event(MakeJudgeEvent)
 def make_judge(
     name: str,
     instructions: str,
     model: str | None = None,
 ) -> Judge:
     """
+
+    .. note::
+        As of MLflow 3.4.0, this function is deprecated in favor of `mlflow.genai.make_judge`
+        and may be removed in a future version.
+
     Create a custom MLflow judge instance.
 
     Args:
@@ -75,6 +83,13 @@ def make_judge(
             for trace in traces:
                 feedback = trace_judge(trace=trace)
                 print(f"Trace {trace.info.trace_id}: {feedback.value} - {feedback.rationale}")
+
+            # Align a judge with human feedback
+            aligned_judge = quality_judge.align(traces)
+
+            # To see detailed optimization output during alignment, enable DEBUG logging:
+            # import logging
+            # logging.getLogger("mlflow.genai.judges.optimizers.simba").setLevel(logging.DEBUG)
     """
 
     return InstructionsJudge(name=name, instructions=instructions, model=model)

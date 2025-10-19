@@ -1,0 +1,364 @@
+/Users/Projects/Smarter-Anticoagulant-Dosing-Through-Precision-Medicine/mlflow-env/lib/python3.10/site-packages/mlflow/gateway/config.py:454: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+  class Route(ConfigModel):
+2025/10/19 14:15:50 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/10/19 14:15:50 INFO mlflow.store.db.utils: Updating database tables
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade  -> 451aebb31d03, add metric step
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade 451aebb31d03 -> 90e64c465722, migrate user column to tags
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade 90e64c465722 -> 181f10493468, allow nulls for metric values
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade 181f10493468 -> df50e92ffc5e, Add Experiment Tags Table
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade df50e92ffc5e -> 7ac759974ad8, Update run tags with larger limit
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade 7ac759974ad8 -> 89d4b8295536, create latest metrics table
+2025-10-19 14:15:50 INFO  [89d4b8295536_create_latest_metrics_table_py] Migration complete!
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade 89d4b8295536 -> 2b4d017a5e9b, add model registry tables to db
+2025-10-19 14:15:50 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Adding registered_models and model_versions tables to database.
+2025-10-19 14:15:50 INFO  [2b4d017a5e9b_add_model_registry_tables_to_db_py] Migration complete!
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade 2b4d017a5e9b -> cfd24bdc0731, Update run status constraint with killed
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade cfd24bdc0731 -> 0a8213491aaa, drop_duplicate_killed_constraint
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade 0a8213491aaa -> 728d730b5ebd, add registered model tags table
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade 728d730b5ebd -> 27a6a02d2cf1, add model version tags table
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade 27a6a02d2cf1 -> 84291f40a231, add run_link to model_version
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade 84291f40a231 -> a8c4a736bde6, allow nulls for run_id
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade a8c4a736bde6 -> 39d1c3be5f05, add_is_nan_constraint_for_metrics_tables_if_necessary
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade 39d1c3be5f05 -> c48cb773bb87, reset_default_value_for_is_nan_in_metrics_table_for_mysql
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade c48cb773bb87 -> bd07f7e963c5, create index on run_uuid
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade bd07f7e963c5 -> 0c779009ac13, add deleted_time field to runs table
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade 0c779009ac13 -> cc1f77228345, change param value length to 500
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade cc1f77228345 -> 97727af70f4d, Add creation_time and last_update_time to experiments table
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade 97727af70f4d -> 3500859a5d39, Add Model Aliases table
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade 3500859a5d39 -> 7f2a7d5fae7d, add datasets inputs input_tags tables
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade 7f2a7d5fae7d -> 2d6e25af4d3e, increase max param val length from 500 to 8000
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade 2d6e25af4d3e -> acf3f17fdcc7, add storage location field to model versions
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade acf3f17fdcc7 -> 867495a8f9d4, add trace tables
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade 867495a8f9d4 -> 5b0e9adcef9c, add cascade deletion to trace tables foreign keys
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade 5b0e9adcef9c -> 4465047574b1, increase max dataset schema size
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade 4465047574b1 -> f5a4f2784254, increase run tag value limit to 8000
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade f5a4f2784254 -> 0584bdc529eb, add cascading deletion to datasets from experiments
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade 0584bdc529eb -> 400f98739977, add logged model tables
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade 400f98739977 -> 6953534de441, add step to inputs table
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade 6953534de441 -> bda7b8c39065, increase_model_version_tag_value_limit
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade bda7b8c39065 -> cbc13b556ace, add V3 trace schema columns
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade cbc13b556ace -> 770bee3ae1dd, add assessments table
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade 770bee3ae1dd -> a1b2c3d4e5f6, add spans table
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade a1b2c3d4e5f6 -> de4033877273, create entity_associations table
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade de4033877273 -> 1a0cddfcaa16, Add webhooks and webhook_events tables
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade 1a0cddfcaa16 -> 534353b11cbc, add scorer tables
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade 534353b11cbc -> 71994744cf8e, add evaluation datasets
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade 71994744cf8e -> 3da73c924c2f, add outputs to dataset record
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Running upgrade 3da73c924c2f -> bf29a5ff90ea, add jobs table
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2025/10/19 14:15:50 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/10/19 14:15:50 INFO mlflow.store.db.utils: Updating database tables
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2025-10-19 14:15:50 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+[MLflow] Security middleware enabled with default settings (localhost-only). To allow connections from other hosts, use --host 0.0.0.0 and configure --allowed-hosts and --cors-allowed-origins.
+INFO:     Uvicorn running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+INFO:     Started parent process [86222]
+INFO:     Started server process [86226]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Started server process [86225]
+INFO:     Waiting for application startup.
+INFO:     Started server process [86224]
+INFO:     Waiting for application startup.
+INFO:     Started server process [86227]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Application startup complete.
+INFO:     Application startup complete.
+2025/10/19 14:16:16 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/10/19 14:16:16 INFO mlflow.store.db.utils: Updating database tables
+2025-10-19 14:16:16 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2025-10-19 14:16:16 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2025-10-19 14:16:16 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2025-10-19 14:16:16 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO:     127.0.0.1:60985 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+2025/10/19 14:16:46 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/10/19 14:16:46 INFO mlflow.store.db.utils: Updating database tables
+2025-10-19 14:16:46 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2025-10-19 14:16:46 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2025-10-19 14:16:46 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2025-10-19 14:16:46 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO:     127.0.0.1:60997 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61011 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61026 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61039 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+2025/10/19 14:18:47 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/10/19 14:18:47 INFO mlflow.store.db.utils: Updating database tables
+2025-10-19 14:18:47 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2025-10-19 14:18:47 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2025-10-19 14:18:48 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2025-10-19 14:18:48 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO:     127.0.0.1:61052 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61052 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:61052 - "GET /static-files/static/css/main.280d6c90.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61052 - "GET /static-files/static/js/3617.10568100.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61052 - "GET /ajax-api/2.0/mlflow/experiments/search?max_results=5&order_by=last_update_time+DESC HTTP/1.1" 200 OK
+2025/10/19 14:18:58 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/10/19 14:18:58 INFO mlflow.store.db.utils: Updating database tables
+2025-10-19 14:18:58 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2025-10-19 14:18:58 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+2025-10-19 14:18:58 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2025-10-19 14:18:58 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO:     127.0.0.1:61054 - "GET /ajax-api/2.0/mlflow/experiments/search?max_results=25&order_by=last_update_time+DESC HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61054 - "GET /static-files/static/js/3912.4ccb2a0a.chunk.js HTTP/1.1" 200 OK
+2025/10/19 14:18:58 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/10/19 14:18:58 INFO mlflow.store.db.utils: Updating database tables
+2025-10-19 14:18:58 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2025-10-19 14:18:58 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO:     127.0.0.1:61054 - "GET /ajax-api/2.0/mlflow/registered-models/search?filter=tags.%60mlflow.prompt.is_prompt%60+%3D+%27true%27 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61055 - "GET /ajax-api/2.0/mlflow/experiments/get-by-name?experiment_name=Gene HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61055 - "GET /ajax-api/2.0/mlflow/experiments/get-by-name?experiment_name=Genec HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61055 - "GET /ajax-api/2.0/mlflow/experiments/get-by-name?experiment_name=Genexa HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61055 - "GET /ajax-api/2.0/mlflow/experiments/get-by-name?experiment_name=Genexa_ HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61055 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61055 - "GET /ajax-api/2.0/mlflow/experiments/get-by-name?experiment_name=Genexa_Warfar HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61055 - "GET /ajax-api/2.0/mlflow/experiments/get-by-name?experiment_name=Genexa_Warfarin+ HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61055 - "GET /ajax-api/2.0/mlflow/experiments/get-by-name?experiment_name=Genexa_Warfarin HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61055 - "GET /ajax-api/2.0/mlflow/experiments/get-by-name?experiment_name=Genexa_Warfarin_ HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61055 - "GET /ajax-api/2.0/mlflow/experiments/get-by-name?experiment_name=Genexa_Warfarin_Dosing HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61055 - "GET /ajax-api/2.0/mlflow/experiments/get-by-name?experiment_name=Genexa_Warfarin_Dosing HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61055 - "POST /ajax-api/2.0/mlflow/experiments/create HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61055 - "GET /static-files/static/js/8975.6d6dd5b6.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61062 - "GET /static-files/static/js/7883.558b8f32.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61060 - "GET /static-files/static/js/9594.f03502c6.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61061 - "GET /static-files/static/js/5167.310c661a.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61062 - "GET /static-files/static/js/8906.c3552638.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61058 - "GET /static-files/static/js/8799.de860ae0.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61059 - "GET /static-files/static/js/8911.72a138f6.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61060 - "POST /graphql HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61061 - "GET /ajax-api/2.0/mlflow/traces?experiment_ids=1&order_by=timestamp_ms%20DESC&max_results=1&filter= HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61062 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61055 - "POST /ajax-api/2.0/mlflow/experiments/search-datasets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61059 - "GET /static-files/static/css/1575.05d081e5.chunk.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61058 - "GET /static-files/static/js/1575.6f955232.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61060 - "GET /ajax-api/2.0/mlflow/gateway-proxy?gateway_path=api%2F2.0%2Fendpoints%2F HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61062 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61061 - "POST /ajax-api/2.0/mlflow/logged-models/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61055 - "POST /ajax-api/2.0/mlflow/experiments/set-experiment-tag HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61059 - "POST /graphql HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61058 - "GET /ajax-api/2.0/mlflow/gateway-proxy?gateway_path=api%2F2.0%2Fendpoints%2F HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61061 - "POST /ajax-api/2.0/mlflow/experiments/search-datasets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61060 - "POST /ajax-api/2.0/mlflow/logged-models/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61062 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61067 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61076 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61082 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61087 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61091 - "GET /ajax-api/2.0/mlflow/experiments/search?max_results=5&order_by=last_update_time+DESC HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61091 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61093 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61097 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61101 - "GET /ajax-api/2.0/mlflow/experiments/search?max_results=5&order_by=last_update_time+DESC HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61101 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61101 - "GET /ajax-api/2.0/mlflow/experiments/search?max_results=5&order_by=last_update_time+DESC HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61105 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61110 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61112 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61116 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61118 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61128 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61130 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61133 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61136 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61138 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61141 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61143 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61148 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61152 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61157 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61160 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61163 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61165 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61167 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61188 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61197 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61200 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61203 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61205 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61207 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61209 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61212 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61214 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61216 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61219 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61222 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61225 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61229 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61233 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61242 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61244 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61247 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61249 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61255 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61259 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61262 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61266 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61274 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61276 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61278 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61281 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61282 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61284 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61285 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61293 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61295 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61296 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61298 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61299 - "GET /ajax-api/2.0/mlflow/experiments/search?max_results=5&order_by=last_update_time+DESC HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61299 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61303 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61307 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61319 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61330 - "GET /api/2.0/mlflow/experiments/get-by-name?experiment_name=Smarter_Anticoagulant_Dosing HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61330 - "POST /api/2.0/mlflow/experiments/create HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61330 - "GET /api/2.0/mlflow/experiments/get?experiment_id=2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61332 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61335 - "POST /api/2.0/mlflow/runs/create HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61335 - "POST /api/2.0/mlflow/runs/log-batch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61335 - "GET /api/2.0/mlflow/runs/get?run_uuid=8482a8249fd843bb84baa1c0a9cd7383&run_id=8482a8249fd843bb84baa1c0a9cd7383 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61335 - "GET /api/2.0/mlflow/runs/get?run_uuid=8482a8249fd843bb84baa1c0a9cd7383&run_id=8482a8249fd843bb84baa1c0a9cd7383 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61335 - "POST /api/2.0/mlflow/runs/log-batch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61335 - "GET /api/2.0/mlflow/runs/get?run_uuid=8482a8249fd843bb84baa1c0a9cd7383&run_id=8482a8249fd843bb84baa1c0a9cd7383 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61335 - "POST /api/2.0/mlflow/logged-models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61335 - "POST /api/2.0/mlflow/runs/outputs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61335 - "GET /api/2.0/mlflow/runs/get?run_uuid=8482a8249fd843bb84baa1c0a9cd7383&run_id=8482a8249fd843bb84baa1c0a9cd7383 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61335 - "GET /api/2.0/mlflow/metrics/get-history?run_uuid=8482a8249fd843bb84baa1c0a9cd7383&metric_key=mae&run_id=8482a8249fd843bb84baa1c0a9cd7383&max_results=25000 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61335 - "GET /api/2.0/mlflow/metrics/get-history?run_uuid=8482a8249fd843bb84baa1c0a9cd7383&metric_key=rmse&run_id=8482a8249fd843bb84baa1c0a9cd7383&max_results=25000 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61335 - "GET /api/2.0/mlflow/metrics/get-history?run_uuid=8482a8249fd843bb84baa1c0a9cd7383&metric_key=r2&run_id=8482a8249fd843bb84baa1c0a9cd7383&max_results=25000 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61335 - "POST /api/2.0/mlflow/runs/log-batch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61335 - "GET /api/2.0/mlflow/logged-models/m-4d3975dbb0664cad974531599cd5daf0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61335 - "PATCH /api/2.0/mlflow/logged-models/m-4d3975dbb0664cad974531599cd5daf0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61335 - "GET /api/2.0/mlflow/runs/get?run_uuid=8482a8249fd843bb84baa1c0a9cd7383&run_id=8482a8249fd843bb84baa1c0a9cd7383 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61335 - "POST /api/2.0/mlflow/runs/update HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61335 - "POST /api/2.0/mlflow/runs/create HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61339 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61339 - "GET / HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:61339 - "POST /graphql HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61339 - "GET /ajax-api/2.0/mlflow/traces?experiment_ids=2&order_by=timestamp_ms%20DESC&max_results=1&filter= HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61340 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61341 - "POST /ajax-api/2.0/mlflow/experiments/search-datasets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61339 - "GET /ajax-api/2.0/mlflow/gateway-proxy?gateway_path=api%2F2.0%2Fendpoints%2F HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61340 - "POST /ajax-api/2.0/mlflow/logged-models/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61341 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61339 - "GET /ajax-api/2.0/mlflow/gateway-proxy?gateway_path=api%2F2.0%2Fendpoints%2F HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61340 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61346 - "GET /ajax-api/2.0/mlflow/traces?experiment_ids=2&order_by=timestamp_ms%20DESC&max_results=1&filter= HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61347 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61349 - "GET /static-files/static/js/2820.e9a9d989.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61351 - "GET /static-files/static/js/7679.5be5e428.chunk.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61350 - "GET /static-files/static/css/7679.73d820e1.chunk.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61351 - "GET /ajax-api/2.0/mlflow/registered-models/search?filter=&max_results=25&order_by=name+ASC HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61349 - "GET /ajax-api/2.0/mlflow/experiments/search?max_results=25&order_by=last_update_time+DESC HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61352 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "POST /api/2.0/mlflow/runs/log-batch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "GET /api/2.0/mlflow/runs/get?run_uuid=976f6a95910e47d4ace0aceb28c1fc8c&run_id=976f6a95910e47d4ace0aceb28c1fc8c HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "GET /api/2.0/mlflow/runs/get?run_uuid=976f6a95910e47d4ace0aceb28c1fc8c&run_id=976f6a95910e47d4ace0aceb28c1fc8c HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "POST /api/2.0/mlflow/runs/log-batch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "GET /api/2.0/mlflow/runs/get?run_uuid=976f6a95910e47d4ace0aceb28c1fc8c&run_id=976f6a95910e47d4ace0aceb28c1fc8c HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "POST /api/2.0/mlflow/logged-models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "POST /api/2.0/mlflow/runs/outputs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "GET /api/2.0/mlflow/runs/get?run_uuid=976f6a95910e47d4ace0aceb28c1fc8c&run_id=976f6a95910e47d4ace0aceb28c1fc8c HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "GET /api/2.0/mlflow/metrics/get-history?run_uuid=976f6a95910e47d4ace0aceb28c1fc8c&metric_key=mae&run_id=976f6a95910e47d4ace0aceb28c1fc8c&max_results=25000 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "GET /api/2.0/mlflow/metrics/get-history?run_uuid=976f6a95910e47d4ace0aceb28c1fc8c&metric_key=rmse&run_id=976f6a95910e47d4ace0aceb28c1fc8c&max_results=25000 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "GET /api/2.0/mlflow/metrics/get-history?run_uuid=976f6a95910e47d4ace0aceb28c1fc8c&metric_key=r2&run_id=976f6a95910e47d4ace0aceb28c1fc8c&max_results=25000 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "POST /api/2.0/mlflow/runs/log-batch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "GET /api/2.0/mlflow/logged-models/m-c4e7a77ff4a04207b1ecdc1453658619 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "PATCH /api/2.0/mlflow/logged-models/m-c4e7a77ff4a04207b1ecdc1453658619 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "GET /api/2.0/mlflow/runs/get?run_uuid=976f6a95910e47d4ace0aceb28c1fc8c&run_id=976f6a95910e47d4ace0aceb28c1fc8c HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "POST /api/2.0/mlflow/runs/update HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "POST /api/2.0/mlflow/runs/create HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "POST /api/2.0/mlflow/runs/log-batch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "GET /api/2.0/mlflow/runs/get?run_uuid=c3441bda25dd430c89e470bbd97ff07f&run_id=c3441bda25dd430c89e470bbd97ff07f HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "GET /api/2.0/mlflow/runs/get?run_uuid=c3441bda25dd430c89e470bbd97ff07f&run_id=c3441bda25dd430c89e470bbd97ff07f HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "POST /api/2.0/mlflow/runs/log-batch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "GET /api/2.0/mlflow/runs/get?run_uuid=c3441bda25dd430c89e470bbd97ff07f&run_id=c3441bda25dd430c89e470bbd97ff07f HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "POST /api/2.0/mlflow/logged-models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "POST /api/2.0/mlflow/runs/outputs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "GET /api/2.0/mlflow/runs/get?run_uuid=c3441bda25dd430c89e470bbd97ff07f&run_id=c3441bda25dd430c89e470bbd97ff07f HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "GET /api/2.0/mlflow/metrics/get-history?run_uuid=c3441bda25dd430c89e470bbd97ff07f&metric_key=mae&run_id=c3441bda25dd430c89e470bbd97ff07f&max_results=25000 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "GET /api/2.0/mlflow/metrics/get-history?run_uuid=c3441bda25dd430c89e470bbd97ff07f&metric_key=rmse&run_id=c3441bda25dd430c89e470bbd97ff07f&max_results=25000 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "GET /api/2.0/mlflow/metrics/get-history?run_uuid=c3441bda25dd430c89e470bbd97ff07f&metric_key=r2&run_id=c3441bda25dd430c89e470bbd97ff07f&max_results=25000 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "POST /api/2.0/mlflow/runs/log-batch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "GET /api/2.0/mlflow/logged-models/m-d58b27eeced54cf78c6cdd7e2132fc1e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "PATCH /api/2.0/mlflow/logged-models/m-d58b27eeced54cf78c6cdd7e2132fc1e HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "GET /api/2.0/mlflow/runs/get?run_uuid=c3441bda25dd430c89e470bbd97ff07f&run_id=c3441bda25dd430c89e470bbd97ff07f HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "POST /api/2.0/mlflow/runs/update HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61354 - "POST /api/2.0/mlflow/runs/create HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61362 - "GET /ajax-api/2.0/mlflow/experiments/search?max_results=25&order_by=last_update_time+DESC HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61362 - "POST /graphql HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61362 - "GET /ajax-api/2.0/mlflow/experiments/get?experiment_id=1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61363 - "POST /ajax-api/2.0/mlflow/experiments/search-datasets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61362 - "GET /ajax-api/2.0/mlflow/gateway-proxy?gateway_path=api%2F2.0%2Fendpoints%2F HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61363 - "POST /ajax-api/2.0/mlflow/logged-models/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61362 - "GET /ajax-api/2.0/mlflow/gateway-proxy?gateway_path=api%2F2.0%2Fendpoints%2F HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61364 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61363 - "GET /ajax-api/2.0/mlflow/experiments/search?max_results=25&order_by=last_update_time+DESC HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61362 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61362 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61363 - "GET /ajax-api/2.0/mlflow/traces?experiment_ids=2&order_by=timestamp_ms%20DESC&max_results=1&filter= HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61364 - "POST /ajax-api/2.0/mlflow/experiments/search-datasets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61362 - "POST /ajax-api/2.0/mlflow/experiments/set-experiment-tag HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61363 - "POST /graphql HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61368 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61370 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61369 - "GET /ajax-api/2.0/mlflow/traces?experiment_ids=2&order_by=timestamp_ms%20DESC&max_results=1&filter= HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61370 - "GET /ajax-api/2.0/mlflow/experiments/get?experiment_id=2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61369 - "POST /ajax-api/2.0/mlflow/experiments/search-datasets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61371 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61370 - "GET /ajax-api/2.0/mlflow/gateway-proxy?gateway_path=api%2F2.0%2Fendpoints%2F HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61369 - "POST /ajax-api/2.0/mlflow/logged-models/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61368 - "POST /graphql HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61372 - "POST /api/2.0/mlflow/runs/log-batch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61372 - "GET /api/2.0/mlflow/runs/get?run_uuid=f92532a026954f2ba791dd5486fd7550&run_id=f92532a026954f2ba791dd5486fd7550 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61372 - "GET /api/2.0/mlflow/runs/get?run_uuid=f92532a026954f2ba791dd5486fd7550&run_id=f92532a026954f2ba791dd5486fd7550 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61372 - "POST /api/2.0/mlflow/runs/log-batch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61372 - "GET /api/2.0/mlflow/runs/get?run_uuid=f92532a026954f2ba791dd5486fd7550&run_id=f92532a026954f2ba791dd5486fd7550 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61372 - "POST /api/2.0/mlflow/logged-models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61372 - "POST /api/2.0/mlflow/runs/outputs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61372 - "GET /api/2.0/mlflow/runs/get?run_uuid=f92532a026954f2ba791dd5486fd7550&run_id=f92532a026954f2ba791dd5486fd7550 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61372 - "GET /api/2.0/mlflow/metrics/get-history?run_uuid=f92532a026954f2ba791dd5486fd7550&metric_key=mae&run_id=f92532a026954f2ba791dd5486fd7550&max_results=25000 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61372 - "GET /api/2.0/mlflow/metrics/get-history?run_uuid=f92532a026954f2ba791dd5486fd7550&metric_key=rmse&run_id=f92532a026954f2ba791dd5486fd7550&max_results=25000 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61372 - "GET /api/2.0/mlflow/metrics/get-history?run_uuid=f92532a026954f2ba791dd5486fd7550&metric_key=r2&run_id=f92532a026954f2ba791dd5486fd7550&max_results=25000 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61372 - "POST /api/2.0/mlflow/runs/log-batch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61374 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61372 - "GET /api/2.0/mlflow/logged-models/m-6a7e8741eea44f559926775a7fa68444 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61372 - "PATCH /api/2.0/mlflow/logged-models/m-6a7e8741eea44f559926775a7fa68444 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61372 - "GET /api/2.0/mlflow/runs/get?run_uuid=f92532a026954f2ba791dd5486fd7550&run_id=f92532a026954f2ba791dd5486fd7550 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61372 - "POST /api/2.0/mlflow/runs/update HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61372 - "POST /api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61372 - "GET /api/2.0/mlflow/runs/get?run_uuid=f92532a026954f2ba791dd5486fd7550&run_id=f92532a026954f2ba791dd5486fd7550 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61372 - "GET /api/2.0/mlflow/runs/get?run_uuid=f92532a026954f2ba791dd5486fd7550&run_id=f92532a026954f2ba791dd5486fd7550 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61372 - "POST /api/2.0/mlflow/logged-models/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61372 - "GET /api/2.0/mlflow/logged-models/m-6a7e8741eea44f559926775a7fa68444 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61372 - "GET /api/2.0/mlflow/logged-models/m-6a7e8741eea44f559926775a7fa68444 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61372 - "GET /api/2.0/mlflow/logged-models/m-6a7e8741eea44f559926775a7fa68444 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61372 - "GET /api/2.0/mlflow/logged-models/m-6a7e8741eea44f559926775a7fa68444 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61372 - "PATCH /api/2.0/mlflow/logged-models/m-6a7e8741eea44f559926775a7fa68444/tags HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61372 - "GET /api/2.0/mlflow/logged-models/m-6a7e8741eea44f559926775a7fa68444 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61372 - "GET /api/2.0/mlflow/logged-models/m-6a7e8741eea44f559926775a7fa68444 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61382 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61384 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61387 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61402 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61402 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61413 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61413 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+2025/10/19 14:55:36 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/10/19 14:55:36 INFO mlflow.store.db.utils: Updating database tables
+2025-10-19 14:55:36 INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+2025-10-19 14:55:36 INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO:     127.0.0.1:61417 - "GET /ajax-api/2.0/mlflow/registered-models/search?filter=&max_results=25&order_by=name+ASC HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61419 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61423 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61423 - "GET /static-files/manifest.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61423 - "GET /ajax-api/2.0/mlflow/registered-models/search?filter=&max_results=25&order_by=name+ASC HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61423 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61425 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61431 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61431 - "GET /ajax-api/2.0/mlflow/experiments/search?max_results=5&order_by=last_update_time+DESC HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61431 - "GET /ajax-api/2.0/mlflow/registered-models/search?filter=&max_results=25&order_by=name+ASC HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61435 - "POST /ajax-api/2.0/mlflow/runs/search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61437 - "GET /ajax-api/2.0/mlflow/experiments/search?max_results=5&order_by=last_update_time+DESC HTTP/1.1" 200 OK
