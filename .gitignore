@@ -10,3 +10,4 @@ __pycache__/
 *.parquet
 *.db
 .DS_Store
+*.pkl
